@@ -1,17 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+import { Route, Switch } from 'react-router';
+import productApi from './api/productApi';
+import Header from './components/Header';
+import CounterFeature from './features/Counter';
+import PostFeature from './features/Post';
+import ProductFeature from './features/Product';
+import TodoFeature from './features/Todo';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Dat Nguyen
-        </p>
-      </header>
-    </div>
-  );
+    useEffect(() => {
+        const fetchProduct = async () => {
+            const params = {
+                _limit: 10,
+            };
+            await productApi.getAll(params);
+        };
+
+        fetchProduct();
+    }, []);
+
+    return (
+        <div className="App">
+            <Header />
+            <Switch>
+                <Route path="/posts" component={PostFeature}></Route>
+                <Route path="/todos" component={TodoFeature}></Route>
+                <Route path="/counter" component={CounterFeature}></Route>
+                <Route path="/products" component={ProductFeature}></Route>
+            </Switch>
+        </div>
+    );
 }
 
 export default App;
