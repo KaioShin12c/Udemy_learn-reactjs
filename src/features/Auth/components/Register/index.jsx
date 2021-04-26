@@ -18,7 +18,7 @@ function Register(props) {
             values.username = values.email;
             const action = register(values);
             const resultAction = await dispatch(action);
-            const user = unwrapResult(resultAction);
+            unwrapResult(resultAction);
 
             //close dialog
             const { closeDialog } = props;

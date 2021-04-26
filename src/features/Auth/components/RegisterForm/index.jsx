@@ -2,10 +2,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import {
     Avatar,
     Button,
-    makeStyles,
-    styled,
-    Typography,
     LinearProgress,
+    makeStyles,
+    Typography,
 } from '@material-ui/core';
 import { LockOutlined } from '@material-ui/icons';
 import PropTypes from 'prop-types';
