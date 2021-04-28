@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Route, Switch } from 'react-router';
 import productApi from './api/productApi';
 import Header from './components/Header';
+import CartFeature from './features/Cart';
 import CounterFeature from './features/Counter';
 import PostFeature from './features/Post';
 import ProductFeature from './features/Product';
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/todos" component={TodoFeature}></Route>
                 <Route path="/counter" component={CounterFeature}></Route>
                 <Route path="/products" component={ProductFeature}></Route>
+                <Route path="/cart" component={CartFeature}></Route>
             </Switch>
         </div>
     );
