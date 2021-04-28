@@ -1,4 +1,4 @@
-import { Box, IconButton } from '@material-ui/core';
+import { Badge, Box, IconButton } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { AccountCircle } from '@material-ui/icons';
+import { AccountCircle, ShoppingCart } from '@material-ui/icons';
 import CodeIcon from '@material-ui/icons/Code';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +17,7 @@ import { Link, NavLink } from 'react-router-dom';
 import Login from '../../features/Auth/components/Login';
 import Register from '../../features/Auth/components/Register';
 import { logout } from '../../features/Auth/userSlice';
+import { cartItemsCountSelector } from '../../features/Cart/selectors';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,6 +48,7 @@ export default function Header() {
     const [open, setOpen] = useState(false);
     const [mode, setMode] = useState(MODE.LOGIN);
     const [anchorEl, setAnchorEl] = useState(null);
+    const cartItemsCount = useSelector(cartItemsCountSelector);
 
     const loggedInUser = useSelector((state) => state.user.current);
     const isLoggedIn = !!loggedInUser.id;
@@ -98,9 +100,6 @@ export default function Header() {
                     <NavLink className={classes.link} to="/products">
                         <Button color="inherit">Products</Button>
                     </NavLink>
-                    <NavLink className={classes.link} to="/cart">
-                        <Button color="inherit">Cart</Button>
-                    </NavLink>
 
                     {!isLoggedIn && (
                         <Button color="inherit" onClick={handleClickOpen}>
@@ -112,6 +111,14 @@ export default function Header() {
                             <AccountCircle />
                         </IconButton>
                     )}
+
+                    <NavLink className={classes.link} to="/cart">
+                        <IconButton aria-label="show 4 new mails" color="inherit">
+                            <Badge badgeContent={cartItemsCount} color="secondary">
+                                <ShoppingCart />
+                            </Badge>
+                        </IconButton>
+                    </NavLink>
                 </Toolbar>
             </AppBar>
             <Menu

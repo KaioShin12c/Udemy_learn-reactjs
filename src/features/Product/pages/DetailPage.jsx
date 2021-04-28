@@ -2,21 +2,23 @@ import {
     Box,
     Container,
     Grid,
+    LinearProgress,
     makeStyles,
     Paper,
-    LinearProgress,
 } from '@material-ui/core';
 import React from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router';
+import { useRouteMatch } from 'react-router-dom';
+import { addToCart } from '../../Cart/cartSlice';
 import AddToCardForm from '../components/AddToCartForm';
+import ProductAdditional from '../components/ProductAdditional';
+import ProductDescription from '../components/ProductDescription';
 import ProductInfo from '../components/ProductInfo';
 import ProductMenu from '../components/ProductMenu';
+import ProductReviews from '../components/ProductReviews';
 import ProductThumbnail from '../components/ProductThumbnail';
 import useProductDetail from '../hooks/useProductDetail';
-import ProductDescription from '../components/ProductDescription';
-import ProductAdditional from '../components/ProductAdditional';
-import ProductReviews from '../components/ProductReviews';
 
 const useStyle = makeStyles((theme) => ({
     root: {
@@ -41,6 +43,7 @@ const useStyle = makeStyles((theme) => ({
 
 function DetailPage() {
     const classes = useStyle();
+    const dispatch = useDispatch();
     const {
         params: { productId },
         url,
@@ -54,8 +57,13 @@ function DetailPage() {
         </Box>;
     }
 
-    const handleAddToCartSubmit = (formValues) => {
-        console.log(formValues);
+    const handleAddToCartSubmit = ({ quantity }) => {
+        const action = addToCart({
+            id: product.id,
+            product,
+            quantity,
+        });
+        dispatch(action);
     };
 
     return (
