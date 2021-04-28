@@ -1,11 +1,6 @@
+import { Box, Link, makeStyles } from '@material-ui/core';
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Box, Link } from '@material-ui/core';
 import { NavLink, useRouteMatch } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core';
-import { MicNone } from '@material-ui/icons';
-
-ProductMenu.propTypes = {};
 
 const useStyles = makeStyles((theme) => ({
     root: {
