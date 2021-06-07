@@ -57,7 +57,7 @@ function DetailPage() {
         </Box>;
     }
 
-    //Test comment
+    //Test comment commit
 
     const handleAddToCartSubmit = ({ quantity }) => {
         const action = addToCart({
